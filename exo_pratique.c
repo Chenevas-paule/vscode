@@ -5,7 +5,8 @@
 #include <unistd.h>
 //pour l'exo 5 
 #include "registre.h"
-
+//pour l'exo 6
+#include "tableaux_util.h"
 /*
 -------------------------------------------------------------------------------------------------------
     EXO 1
@@ -176,8 +177,26 @@ void exo5(void){
     printf("inconnu = %d\n", registre_lire("inconnu"));
 }
 
+/*
+-------------------------------------------------------------------------------------------------------
+    EXO 6
+*/
+void exo6(void){
+    int tab1[] = {8, 3, 14, 1, 9, 6, 12, 5};
+    int tab2[8];
+    copier_tableau(tab2, tab1, 8);
+    afficher_tableau("tab1", tab1, 8);
+    afficher_tableau("tab2", tab2, 8);
+    printf("Apres copie : tableaux %s\n",
+           comparer_tableaux(tab1, tab2, 8) ? "identiques" : "differents");
+
+    tab2[3] = 42;
+    printf("Apres modification : tableaux %s\n",
+           comparer_tableaux(tab1, tab2, 8) ? "identiques" : "differents");
+}
+
 int main(void)
 {
-    exo5();
+    exo6();
     return 0;
 }
