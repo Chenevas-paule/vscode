@@ -181,6 +181,12 @@ void exo5(void){
 -------------------------------------------------------------------------------------------------------
     EXO 6
 */
+/*
+Avec copier_tableau(tab + 1, tab, 5), les zones source et destination se recouvrent :
+les valeurs copiees peuvent donc ecraser des elements qui doivent encore etre lus, ce qui
+produit un comportement indefini. Les parametres restrict indiquent que ces acces doivent se faire via des pointeurs independants ; cet appel
+viole donc ce contrat meme s'il semble fonctionner.
+*/
 void exo6(void){
     int tab1[] = {8, 3, 14, 1, 9, 6, 12, 5};
     int tab2[8];
