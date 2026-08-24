@@ -10,6 +10,12 @@
 #include "nibbles.h"
 //exo 4
 #include "ieee754.h"
+//exo 5
+#include "endianness.h"
+#include <string.h>
+#include <arpa/inet.h>
+//exo 6
+#include "parseur_entete.h"
 
 /*
 -------------------------------------------------------------------------------------------------------
@@ -90,16 +96,52 @@ void exo4(void){
 -------------------------------------------------------------------------------------------------------
     EXO 5
 */
+void exo5(void){
+    uint32_t valeurs_reseau[4] = {0x00000001, 0x000000FF, 0x12345678, 0xDEADBEEF};
+    printf("Tableau recu :\n");
+    for (int i = 0; i < 4; i++) {
+        printf("valeurs_reseau[%d] = 0x%08X\n", i, valeurs_reseau[i]);
+    }
+    printf("systeme little endian ? %s\n", est_little_endian() ? "oui" : "non");
+    if (est_little_endian()) {
+        printf("Tableau apres conversion en little endian :\n");
+        printf("methode ntohl :\n");
+        for (int i = 0; i < 4; i++) {
+            printf("valeurs_Hote[%d] = 0x%08X\n", i, ntohl(valeurs_reseau[i]));
+        }
 
+        printf("methode inverser_endianness32 :\n");
+        inverser_endianness32(valeurs_reseau, 4);
+        for (int i = 0; i < 4; i++) {
+            printf("valeurs_Hote[%d] = 0x%08X\n", i, valeurs_reseau[i]);
+        }
+        
+    }
+
+}
 
 /*
 -------------------------------------------------------------------------------------------------------
     EXO 6
 */
+void exo6(void){
+    uint8_t buffer[8] = {0x12, 0x03, 0x00, 0x01, 0x00, 0x00, 0x00, 0x10};
+    struct entete e;
+    parser_entete(buffer, &e);
+    afficher_entete(&e);
+}
+/*
+-------------------------------------------------------------------------------------------------------
+    EXO 7
+*/
 
+/*
+-------------------------------------------------------------------------------------------------------
+    MAIN
+*/
 
 int main(void)
 {
-    exo4();
+    exo5();
     return 0;
 }
