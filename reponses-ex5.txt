@@ -1,0 +1,6 @@
+Q1. Le premier élément n'est pas un pointeur de fonction, mais l'adresse initiale de la pile permettant de trouver la suite des fonctions à exécuter.
+Q2. `__data_start__` et `__data_end__` correspondent à l'adresse de début/fin de .data et `__data_load__` à l'adresse en flash de ./data.
+Quand on démarre le programme, les données nécessaires sont dans la mémoire flash avec le programme. Or, on a besoin de ces données en RAM pour qu'elles soient utilisées dans le programme. Sur Linux, l'OS se charge de cela automatiquement.
+Q3. Si .bss n'est pas remis à zéro, il pourrait rester des valeurs résiduelles d'une précédente utilisation. Or, les données stockées dans cet espace sont considérées comme étant à zéro par défaut, ce qui pourrait amener à un comportement indéterminé.
+Q4. La boucle infinie sert de protection si le main renvoie une valeur, sans quoi on continuerait à lire les instructions suivantes en mémoire sans lien avec la logique du programme.
+Q5.  Un microcontrôleur possède de nombreux gestionnaires d'interruptions, mais une application n'en utilise généralement qu'une petite partie. Les déclarer « weak » permet donc de fournir automatiquement un gestionnaire par défaut tout en permettant à l'application de ne redéfinir que ceux dont elle a besoin.
